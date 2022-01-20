@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-select.min.css"/>
+        <title>Taylor's Version</title>
+        <style>
+            #song-choices td:hover {
+                background: #f1f1f1;
+            }
+        </style>
+        <script type="text/javascript">
+            const _Albums = new Map();
+
+            _Albums.set("Taylor Swift", [
+                "Tim McGraw", "Picture To Burn", "Teardrops On My Guitar", "A Place in this World", "Cold As You",
+                "The Outside", "Tied Together with a Smile", "Stay Beautiful", "Should've Said No", "Mary's Song (Oh My My My)",
+                "Our Song", "I'm Only Me When I'm With You", "Invisible", "A Perfectly Good Heart"
+            ]);
+
+            _Albums.set("Taylor Swift", [
+                "Tim McGraw", "Picture To Burn", "Teardrops On My Guitar", "A Place in this World", "Cold As You",
+                "The Outside", "Tied Together with a Smile", "Stay Beautiful", "Should've Said No", "Mary's Song (Oh My My My)",
+                "Our Song", "I'm Only Me When I'm With You", "Invisible", "A Perfectly Good Heart"
+            ]);
+
+            _Albums.set("Fearless", [
+                "Fearless", "Fifteen", "Love Story", "Hey Stephen", "White Horse", "You Belong With Me", "Breathe", "Tell Me Why",
+                "You're Not Sorry", "The Way I Loved You", "Forever & Always", "The Best Day", "Change", "Jump Then Fall",
+                "Untouchable", "Forever & Always (Piano Version)", "Come In With The Rain", "Superstar", "The Other Side Of The Door",
+                "Today Was A Fairtytale", "You All Over Me", "Mr. Perfectly Fine", "We Were Happy", "That's When", "Don't You", "Bye Bye Baby"
+            ]);
+
+            _Albums.set("Speak Now", [
+                "Mine", "Sparks Fly", "Back To December", "Speak Now", "Dear John", "Mean", "The Story Of Us", "Never Grow Up", "Enchanted",
+                "Better than Revenge", "Innocent", "Haunted", "Last Kiss", "Long Live", "Ours", "If This Was a Movie", "Superman"
+            ]);
+
+            _Albums.set("Red", [
+                "State Of Grace", "Red", "Treacherous", "I Knew You Were Trouble", "All Too Well", "22", "I Almost Do",
+                "We Are Never Ever Getting Back Together", "Stay Stay Stay", "The Last Time", "Holy Ground", "Sad Beautiful Tragic",
+                "The Lucky One", "Everything Has Changed", "Starlight", "Begin Again", "The Moment I Knew", "Come Back...Be Here",
+                "Girl At Home", "State Of Grace (Acoustic Version)", "Ronan", "Better Man", "Nothing New", "Babe", "Message In A Bottle",
+                "I Bet You Think About Me", "Forever Winter", "Run", "The Very First Night", "All Too Well (10 Minute Version)"
+            ]);
+
+            _Albums.set("1989", [
+                "Welcome to New York", "Blank Space", "Style", "Out Of The Woods", "All You Had To Do Was Stay",
+                "Shake It Off", "I Wish You Would", "Bad Blood", "Wildest Dreams", "How You Get The Girl",
+                "This Love", "I Know Places", "Clean", "Wonderland", "You Are In Love", "New Romantics"
+            ]);
+
+            _Albums.set("reputation", [
+                "...Ready For It?", "End Game", "I Did Something Bad", "Don't Blame Me", "Delicate", "Look What You Made Me Do",
+                "So It Goes...", "Gorgeous", "Getaway Car", "King Of My Heart", "Dancing with Our Hands Tied", "Dress",
+                "This Is Why We Can't Have Nice Things", "Call It What You Want", "New Year's Day"
+            ]);
+
+            _Albums.set("Lover", [
+                "I Forgot That You Existed", "Cruel Summer", "Lover", "The Man", "The Archer", "I Think He Knows",
+                "Miss Americana & The Heartbreak Prince", "Paper Rings", "Cornelia Street", "Death By A Thousand Cuts",
+                "London Boy", "Soon You'll Get Better (feat. The Chicks)", "False God", "You Need To Calm Down", 
+                "Afterglow", "ME! (feat. Brendon Urie)", "It's Nice To Have A Friend", "Daylight"
+            ]);
+
+            _Albums.set("folklore", [
+                "the 1", "cardigan", "the last great american dynasty", "exile", "my tears ricochet",
+                "mirrorball", "seven", "august", "this is me trying", "illicit affairs", "mad woman",
+                "epiphany", "betty", "peace", "hoax", "the lakes - bonus track", "the lakes - original version"
+            ]);
+            
+            _Albums.set("evermore", [
+                "willow", "champagne problems", "gold rush", "'tis the damn season", "tolerate it", "no body, no crime",
+                "happiness", "dorothea", "coney island", "ivy", "cowboy like me", "long story short", "marjorie",
+                "closure", "evermore", "right where you left me", "it's time to go"
+            ]);
+        </script>
+        <script type="text/javascript">
+            var songs = [];
+            var Ranker, choices = 0, question;
+
+            class PreferenceMachine {
+                constructor(n) {
+                    this.size = n;
+                    this.items = [{ item: 0, equals: [] }];
+                    this.current = { item: 1, try: 0, min: 0, max: 1 };
+
+                    this.addAnswer = function (x, y, choice) {
+                        if (choice == 0) {
+                            this.items[this.current.try].equals.push(this.current.item);
+                            this.current = { item: ++this.current.item, try: 0, min: 0, max: this.items.length };
+                        } else {
+                            if (choice == -1) {
+                                this.current.max = this.current.try;
+                            }
+                            else {
+                                this.current.min = this.current.try + 1;
+                            }
+                            if (this.current.min == this.current.max) {
+                                this.items.splice(this.current.min, 0, { item: this.current.item, equals: [] });
+                                this.current = { item: ++this.current.item, try: 0, min: 0, max: this.items.length };
+                            }
+                        }
+                    };
+
+                    this.getQuestion = function () {
+                        if (this.current.item >= this.size) {
+                            return null;
+                        }
+                        this.current.try = Math.floor((this.current.min + this.current.max) / 2);
+
+                        return ({ a: this.current.item, b: this.items[this.current.try].item });
+                    };
+
+                    this.getOrder = function () {
+                        var index = [];
+                        for (var i in this.items) {
+                            var equal = [this.items[i].item];
+                            for (var j in this.items[i].equals) {
+                                equal.push(this.items[i].equals[j]);
+                            }
+                            index.push(equal);
+                        }
+
+                        return index;
+                    };
+                }
+            }
+
+            function SongBattle(answer) {
+                if (answer != null) {
+                    console.log([songs[question.a], "no preference", songs[question.b]][answer + 1]);
+                    Ranker.addAnswer(question.a, question.b, answer);
+                }
+
+                question = Ranker.getQuestion();
+                if (question == null) {
+                    console.log("Done!");
+
+                    var content = `
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Song</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
+
+                    var index = Ranker.getOrder();
+                    for (var i = 0, pos = 1; i < index.length; i++) {
+                        for (var j = 0; j < index[i].length; j ++) {
+                            console.log(pos + ". " + songs[index[i][j]]);
+
+                            var text = `
+                                <tr>
+                                    <th scope="row">${pos}</th>
+                                    <td>${songs[index[i][j]]}</td>
+                                </tr>`;
+                            
+                            content += text;
+                        }
+                        pos += index[i].length;
+                    }
+
+                    content += "</tbody></table>";
+
+                    $("#song-rankings").empty();
+                    $("#song-rankings").append(content);
+
+                    show("#final-view");
+
+                    return;
+                }
+
+                console.log(++choices + ". " + songs[question.a] + " or " + songs[question.b] + "?");
+
+                var content = `
+                    <p>Question #${choices}</p>
+                    <table class="table" id="song-choices">
+                        <thead></thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-2" onclick="SongBattle(-1)">${songs[question.a]}</td>
+                                <td class="col-2" onclick="SongBattle(0)">No Preference</td>
+                                <td class="col-2" onclick="SongBattle(1)">${songs[question.b]}</td>
+                            </tr>
+                        </tbody>
+                    </table>`;
+
+                $("#song-battle").empty();
+                $("#song-battle").append(content);
+            }
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#" onclick="show('#initial-view');">Taylor's Version</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup" data-toggle="collapse" data-target=".navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#About" onclick="show('#about-view');">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Contact" onclick="show('#contact-view');">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main role="main">
+            <div class="container">
+                <section class="py-5 text-center container">
+                    <div class="row py-lg-5">
+                        <div class="col-lg-6 col-md-8 mx-auto">
+                            <div class="container toggable" id="initial-view" style="display: block;">
+                                <h1 class="fw-light">Taylor's Version</h1>
+                                <p class="lead text-muted">This tool helps you rank your favorite Taylor Swift songs</p>
+                                <button type="button" class="btn btn-success" id="start-button">Rank Songs</button>
+                            </div>
+                            <div class="container toggable" id="active-view" style="display: none;">
+                                <p><strong>Time to rank some songs!</strong></p>
+                                <div class="container">
+                                    <p id="song-battle"></p>
+                                </div>
+                                <button type="button" class="btn btn-secondary" onclick="show('#initial-view');">Start Over</button>
+                            </div>
+                            <div class="container toggable" id="final-view" style="display: none;">
+                                <p><strong>Here are your song rankings!</strong></p>
+                                <div class="container">
+                                    <p id="song-rankings"></p>
+                                </div>
+                                <button type="button" class="btn btn-secondary" onclick="show('#initial-view');">Go Back</button>
+                            </div>
+                            <div class="container toggable" id="about-view" style="display: none;">
+                                <h1>About Section</h1>
+                            </div>
+                            <div class="container toggable" id="contact-view" style="display: none;">
+                                <h1>Contact Section</h1>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="container">
+                    <div class="row">
+                        <button type="button" class="btn btn-primary" id="select-all-button">Select All Songs</button>
+                        <button type="button" class="btn btn-primary" id="deselect-all-button">Deselect All Songs</button>
+                    </div>
+                </div>
+                <div class="album py-5 bg-light">
+                    <div class="container">
+                        <div class="row" id="Albums"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="text-muted">
+            <div class="container">
+                <hr><p class="text-center">&copy; Joshua Robison</p>
+            </div>
+        </footer>
+        <script type="text/javascript" src="resources/js/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="resources/js/popper.min.js"></script>
+        <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="resources/js/bootstrap-select.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                for (const [album, tracklist] of _Albums) {
+                    var select = album.replace(/\s/g,"-")+"-Dropdown";
+                    var content = `
+                        <div class="col-md-4">
+                            <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="resources/img/${album}.jpg" alt=${album}>
+                                <div class="card-body">
+                                    <p class="card-text">${album}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <select id=${select} multiple class="selectpicker show-tick" data-size="5" data-actions-box="true">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+
+                    $("#Albums").append(content);
+
+                    var options = [];
+                    tracklist.forEach(song => {
+                        options.push("<option>"+song+"</option>");
+                    });
+
+                    var dropdown = "#"+select;
+                    $(dropdown).append(options);
+                    $(dropdown).selectpicker("refresh");
+                }
+            });
+
+            $("#start-button").click(function() {
+                songs = [];
+                choices = 0, question = null;
+                for (const [album, tracklist] of _Albums) {
+                    var dropdown = "#"+album.replace(/\s/g,"-")+"-Dropdown";
+                    var selected = $(dropdown).val();
+                    selected.forEach(song => {
+                        songs.push(song);
+                    });
+                }
+
+                show("#active-view");
+
+                Ranker = new PreferenceMachine(songs.length);
+                SongBattle(null);
+            });
+
+            $("#select-all-button").click(function() {
+                for (const [album, tracklist] of _Albums) {
+                    var dropdown = "#"+album.replace(/\s/g,"-")+"-Dropdown";
+                    $(dropdown).selectpicker("selectAll");
+                }
+            });
+
+            $("#deselect-all-button").click(function() {
+                for (const [album, tracklist] of _Albums) {
+                    var dropdown = "#"+album.replace(/\s/g,"-")+"-Dropdown";
+                    $(dropdown).selectpicker("deselectAll");
+                }
+            });
+
+            const show = (section) => {
+                $(".toggable").each(function(i, obj) {
+                    $(this).css("display", "none");
+                });
+                
+                $(section).css("display", "block");
+            }
+        </script>
+    </body>
+</html>
