@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-select.min.css"/>
-        <title>Taylor's Version</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css"/>
+        <title>Main Page</title>
         <style>
             #song-choices td:hover {
                 background: #f1f1f1;
@@ -197,17 +197,17 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#" onclick="show('#initial-view');">Taylor's Version</a>
+            <a class="navbar-brand" href="index.html">Taylor's Version</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup" data-toggle="collapse" data-target=".navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#About" onclick="show('#about-view');">About</a>
+                        <a class="nav-link" href="about.html">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#Contact" onclick="show('#contact-view');">Contact</a>
+                        <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -236,12 +236,6 @@
                                 </div>
                                 <button type="button" class="btn btn-secondary" onclick="show('#initial-view');">Go Back</button>
                             </div>
-                            <div class="container toggable" id="about-view" style="display: none;">
-                                <h1>About Section</h1>
-                            </div>
-                            <div class="container toggable" id="contact-view" style="display: none;">
-                                <h1>Contact Section</h1>
-                            </div>
                         </div>
                     </div>
                 </section>
@@ -263,10 +257,10 @@
                 <hr><p class="text-center">&copy; Joshua Robison</p>
             </div>
         </footer>
-        <script type="text/javascript" src="resources/js/jquery-3.3.1.slim.min.js"></script>
-        <script type="text/javascript" src="resources/js/popper.min.js"></script>
-        <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="resources/js/bootstrap-select.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap-select.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 for (const [album, tracklist] of _Albums) {
@@ -274,7 +268,7 @@
                     var content = `
                         <div class="col-md-4">
                             <div class="card mb-4 box-shadow">
-                                <img class="card-img-top" src="resources/img/${album}.jpg" alt=${album}>
+                                <img class="card-img-top" src="img/${album}.jpg" alt=${album}>
                                 <div class="card-body">
                                     <p class="card-text">${album}</p>
                                     <div class="d-flex justify-content-between align-items-center">
