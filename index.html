@@ -186,6 +186,33 @@
 
                 $("#song-battle").empty();
                 $("#song-battle").append(content);
+
+                var progress = Progress();
+                var content = `
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar"
+                        style="width: ${progress}%;" aria-valuenow="${progress}"
+                        aria-valuemin="0" aria-valuemax="1">${progress}%</div>
+                    </div>`;
+
+                console.log(content)
+                
+                $("#status-bar").empty();
+                $("#status-bar").append(content);
+            }
+
+            function Progress() {
+                var count = 0;
+                for (var dict of Object.values(Ranker.items)) {
+                    for (var value of Object.values(dict)) {
+                        count += Number.isFinite(value) ? 1 : 0;
+                        count += Array.isArray(value) ? (value.length ? value.length : 0) : 0;
+                    }
+                }
+
+                var percent = Math.round(100 * count / Ranker.size);
+
+                return percent;
             }
         </script>
     </head>
@@ -221,6 +248,7 @@
                                 <div class="container">
                                     <p id="song-battle"></p>
                                 </div>
+                                <p id="status-bar"></p>
                                 <button type="button" class="btn btn-secondary" onclick="show('#initial-view');">Start Over</button>
                             </div>
                             <div class="container toggable" id="final-view" style="display: none;">
