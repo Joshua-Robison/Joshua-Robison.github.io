@@ -6,7 +6,7 @@
         <!-- Bootstrap CSS Styles -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css"/>
-        <title>Main Page</title>
+        <title>Taylor's Version</title>
         <style>
             /* Custom CSS Styling */
             #song-choices td:hover {
@@ -101,6 +101,8 @@
                                 this.current = { item: ++this.current.item, try: 0, min: 0, max: this.items.length };
                             }
                         }
+
+                        return;
                     };
 
                     this.getQuestion = function () {
@@ -136,7 +138,7 @@
 
                 question = Ranker.getQuestion();
                 if (question == null) {
-                    console.log("Done!");
+                    console.log("Finished ranking songs!");
 
                     var content = `
                         <table class="table table-striped">
@@ -199,11 +201,11 @@
                         style="width: ${progress}%;" aria-valuenow="${progress}"
                         aria-valuemin="0" aria-valuemax="1">${progress}%</div>
                     </div>`;
-
-                console.log(content)
                 
                 $("#status-bar").empty();
                 $("#status-bar").append(content);
+
+                return;
             }
 
             // Progress Estimation
@@ -293,6 +295,7 @@
         <script type="text/javascript" src="js/bootstrap-select.min.js"></script>
         <!-- Custom JavaScript Functions -->
         <script type="text/javascript">
+            // Load Album Contents
             $(document).ready(function() {
                 for (const [album, tracklist] of _Albums) {
                     var select = album.replace(/\s/g,"-")+"-Dropdown";
@@ -323,6 +326,7 @@
                 }
             });
 
+            // Begin Song Ranking Battle
             $("#start-button").click(function() {
                 songs = [];
                 choices = 0, question = null;
@@ -340,6 +344,7 @@
                 SongBattle(null);
             });
 
+            // Toggle ON All Songs
             $("#select-all-button").click(function() {
                 for (const [album, tracklist] of _Albums) {
                     var dropdown = "#"+album.replace(/\s/g,"-")+"-Dropdown";
@@ -347,6 +352,7 @@
                 }
             });
 
+            // Toggle OFF All Songs
             $("#deselect-all-button").click(function() {
                 for (const [album, tracklist] of _Albums) {
                     var dropdown = "#"+album.replace(/\s/g,"-")+"-Dropdown";
@@ -354,13 +360,14 @@
                 }
             });
 
+            // Display HTML Div Block
             const show = (section) => {
                 $(".toggable").each(function(i, obj) {
                     $(this).css("display", "none");
                 });
                 
                 $(section).css("display", "block");
-            }
+            };
         </script>
     </body>
 </html>
