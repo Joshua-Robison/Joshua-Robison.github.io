@@ -3,15 +3,18 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <!-- Bootstrap CSS Styles -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css"/>
         <title>Main Page</title>
         <style>
+            /* Custom CSS Styling */
             #song-choices td:hover {
                 background: #f1f1f1;
             }
         </style>
         <script type="text/javascript">
+            // Global: Album => Tracks
             const _Albums = new Map();
 
             _Albums.set("Taylor Swift", [
@@ -75,6 +78,7 @@
             var songs = [];
             var Ranker, choices = 0, question;
 
+            // Song Ranking Logic
             class PreferenceMachine {
                 constructor(n) {
                     this.size = n;
@@ -123,6 +127,7 @@
                 }
             }
 
+            // User Ranking Function
             function SongBattle(answer) {
                 if (answer != null) {
                     console.log([songs[question.a], "no preference", songs[question.b]][answer + 1]);
@@ -201,6 +206,7 @@
                 $("#status-bar").append(content);
             }
 
+            // Progress Estimation
             function Progress() {
                 var count = 0;
                 for (var dict of Object.values(Ranker.items)) {
@@ -217,6 +223,7 @@
         </script>
     </head>
     <body>
+        <!-- Navigation Panel -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html">Taylor's Version</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -279,10 +286,12 @@
                 <hr><p class="text-center">&copy; Joshua Robison</p>
             </div>
         </footer>
+        <!-- JavaScript Library Dependencies -->
         <script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
         <script type="text/javascript" src="js/popper.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/bootstrap-select.min.js"></script>
+        <!-- Custom JavaScript Functions -->
         <script type="text/javascript">
             $(document).ready(function() {
                 for (const [album, tracklist] of _Albums) {
