@@ -3,18 +3,15 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <!-- Bootstrap CSS Styles -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css"/>
     <title>Taylor's Version</title>
     <style>
-      /* Custom CSS Styling */
       #song-choices td:hover {
         background: #f1f1f1;
       }
     </style>
     <script type="text/javascript">
-      // Global: Album => Tracks
       const _Albums = new Map();
 
       _Albums.set("Taylor Swift", [
@@ -34,92 +31,90 @@
         "A Perfectly Good Heart",
       ]);
 
-      _Albums.set("Fearless (Taylor's Version)", [
-        "Fearless (Taylor's Version)",
-        "Fifteen (Taylor's Version)",
-        "Love Story (Taylor's Version)",
-        "Hey Stephen (Taylor's Version)",
-        "White Horse (Taylor's Version)",
-        "You Belong With Me (Taylor's Version)",
-        "Breathe (feat. Colbie Caillat) (Taylor's Version)",
-        "Tell Me Why (Taylor's Version)",
-        "You're Not Sorry (Taylor's Version)",
-        "The Way I Loved You (Taylor's Version)",
-        "Forever & Always (Taylor's Version)",
-        "The Best Day (Taylor's Version)",
-        "Change (Taylor's Version)",
-        "Jump Then Fall (Taylor's Version)",
-        "Untouchable (Taylor's Version)",
-        "Forever & Always (Piano Version) (Taylor's Version)",
-        "Come In With The Rain (Taylor's Version)",
-        "Superstar (Taylor's Version)",
-        "The Other Side Of The Door (Taylor's Version)",
-        "Today Was A Fairtytale (Taylor's Version)",
-        "You All Over Me (feat. Maren Morris) (Taylor's Version) (From The Vault)",
-        "Mr. Perfectly Fine (Taylor's Version) (From The Vault)",
-        "We Were Happy (Taylor's Version) (From The Vault)",
-        "That's When (feat. Keith Urban) (Taylor's Version) (From The Vault)",
-        "Don't You (Taylor's Version) (From The Vault)",
-        "Bye Bye Baby (Taylor's Version) (From The Vault)",
-        "If This Was a Movie (Taylor's Version)",
+      _Albums.set("Fearless", [
+        "Fearless",
+        "Fifteen",
+        "Love Story",
+        "Hey Stephen",
+        "White Horse",
+        "You Belong With Me",
+        "Breathe",
+        "Tell Me Why",
+        "You're Not Sorry",
+        "The Way I Loved You",
+        "Forever & Always",
+        "The Best Day",
+        "Change",
+        "Jump Then Fall",
+        "Untouchable",
+        "Come In With The Rain",
+        "Superstar",
+        "The Other Side Of The Door",
+        "Today Was A Fairtytale",
+        "You All Over Me",
+        "We Were Happy",
+        "That's When",
+        "Don't You",
+        "Bye Bye Baby",
       ]);
 
-      _Albums.set("Speak Now (Taylor's Version)", [
-        "Mine (Taylor's Version)",
-        "Sparks Fly (Taylor's Version)",
-        "Back To December (Taylor's Version)",
-        "Speak Now (Taylor's Version)",
-        "Dear John (Taylor's Version)",
-        "Mean (Taylor's Version)",
-        "The Story Of Us (Taylor's Version)",
-        "Never Grow Up (Taylor's Version)",
-        "Enchanted (Taylor's Version)",
-        "Better than Revenge (Taylor's Version)",
-        "Innocent (Taylor's Version)",
-        "Haunted (Taylor's Version)",
-        "Last Kiss (Taylor's Version)",
-        "Long Live (Taylor's Version)",
-        "Ours (Taylor's Version)",
-        "Superman (Taylor's Version)",
-        "Electric Touch (feat. Fall Out Boy) (Taylor's Version) (From The Vault)",
-        "When Emma Falls in Love (Taylor's Version) (From The Vault)",
-        "I Can See You (Taylor's Version) (From The Vault)",
-        "Castles Crumbling (feat. Hayley Williams) (Taylor's Version) (From The Vault)",
-        "Foolish One (Taylor's Version) (From The Vault)",
-        "Timeless (Taylor's Version) (From The Vault)",
+      _Albums.set("Speak Now", [
+        "Mine",
+        "Sparks Fly",
+        "Back To December",
+        "Speak Now",
+        "Dear John",
+        "Mean",
+        "The Story Of Us",
+        "Never Grow Up",
+        "Enchanted",
+        "Better than Revenge",
+        "Innocent",
+        "Haunted",
+        "Last Kiss",
+        "Long Live",
+        "Ours",
+        "Superman",
+        "Electric Touch",
+        "When Emma Falls in Love",
+        "I Can See You",
+        "Castles Crumbling",
+        "Foolish One",
+        "Timeless",
       ]);
 
-      _Albums.set("Red (Taylor's Version)", [
-        "State Of Grace (Taylor's Version)",
-        "Red (Taylor's Version)",
-        "Treacherous (Taylor's Version)",
-        "I Knew You Were Trouble (Taylor's Version)",
-        "All Too Well (Taylor's Version)",
-        "22 (Taylor's Version)",
-        "I Almost Do (Taylor's Version)",
-        "We Are Never Ever Getting Back Together (Taylor's Version)",
-        "Stay Stay Stay (Taylor's Version)",
-        "The Last Time (Taylor's Version)",
-        "Holy Ground (Taylor's Version)",
-        "Sad Beautiful Tragic (Taylor's Version)",
-        "The Lucky One (Taylor's Version)",
-        "Everything Has Changed (Taylor's Version)",
-        "Starlight (Taylor's Version)",
-        "Begin Again (Taylor's Version)",
-        "The Moment I Knew (Taylor's Version)",
-        "Come Back...Be Here (Taylor's Version)",
-        "Girl At Home (Taylor's Version)",
-        "State Of Grace (Acoustic Version) (Taylor's Version)",
-        "Ronan (Taylor's Version)",
-        "Better Man (Taylor's Version) (From The Vault)",
-        "Nothing New (feat. Phoebe Bridgers) (Taylor's Version) (From The Vault)",
-        "Babe (Taylor's Version) (From The Vault)",
-        "Message In A Bottle (Taylor's Version) (From The Vault)",
-        "I Bet You Think About Me (feat. Chris Stapleton) (Taylor's Version) (From The Vault)",
-        "Forever Winter (Taylor's Version) (From The Vault)",
-        "Run (feat. Ed Sheeran) (Taylor's Version) (From The Vault)",
-        "The Very First Night (Taylor's Version) (From The Vault)",
-        "All Too Well (10 Minute Version) (Taylor's Version) (From The Vault)",
+      _Albums.set("Red", [
+        "State Of Grace",
+        "Red",
+        "Treacherous",
+        "I Knew You Were Trouble",
+        "All Too Well",
+        "22",
+        "I Almost Do",
+        "We Are Never Ever Getting Back Together",
+        "Stay Stay Stay",
+        "The Last Time",
+        "Holy Ground",
+        "Sad Beautiful Tragic",
+        "The Lucky One",
+        "Everything Has Changed",
+        "Starlight",
+        "Begin Again",
+        "The Moment I Knew",
+        "Come Back... Be Here",
+        "Girl At Home",
+        "Ronan",
+        "Eyes Open",
+        "Safe & Sound",
+        "Better Man",
+        "Nothing New",
+        "Babe",
+        "Message In A Bottle",
+        "I Bet You Think About Me",
+        "Forever Winter",
+        "Run",
+        "The Very First Night",
+        "All Too Well (10 Minute Version)",
       ]);
 
       _Albums.set("1989", [
@@ -139,10 +134,15 @@
         "Wonderland",
         "You Are In Love",
         "New Romantics",
+        "Bad Blood (feat. Kendrick Lamar)",
+        "Slut!",
+        "Now That We Don't Talk",
+        "Suburban Legends",
+        "Is It Over Now?",
       ]);
 
       _Albums.set("reputation", [
-        "...Ready For It?",
+        "... Ready For It?",
         "End Game",
         "I Did Something Bad",
         "Don't Blame Me",
@@ -171,11 +171,11 @@
         "Cornelia Street",
         "Death By A Thousand Cuts",
         "London Boy",
-        "Soon You'll Get Better (feat. The Chicks)",
+        "Soon You'll Get Better",
         "False God",
         "You Need To Calm Down", 
         "Afterglow",
-        "ME! (feat. Brendon Urie)",
+        "ME!",
         "It's Nice To Have A Friend",
         "Daylight",
         "All Of The Girls You Loved Before",
@@ -185,7 +185,7 @@
         "the 1",
         "cardigan",
         "the last great american dynasty",
-        "exile (feat. Bon Iver)",
+        "exile",
         "my tears ricochet",
         "mirrorball",
         "seven",
@@ -198,8 +198,7 @@
         "betty",
         "peace",
         "hoax",
-        "the lakes - bonus track",
-        "the lakes - original version",
+        "the lakes",
       ]);
           
       _Albums.set("evermore", [
@@ -208,25 +207,25 @@
         "gold rush",
         "'tis the damn season",
         "tolerate it",
-        "no body, no crime (feat. HAIM)",
+        "no body, no crime",
         "happiness",
         "dorothea",
-        "coney island (feat. The National)",
+        "coney island",
         "ivy",
         "cowboy like me",
         "long story short",
         "marjorie",
         "closure",
-        "evermore (feat. Bon Iver)",
-        "right where you left me - bonus track",
-        "it's time to go - bonus track",
+        "evermore",
+        "right where you left me",
+        "it's time to go",
       ]);
 
       _Albums.set("Midnights", [
         "Lavender Haze",
         "Maroon",
         "Anti-Hero",
-        "Snow On The Beach (feat. Lana Del Rey)",
+        "Snow On The Beach",
         "You're On Your Own, Kid",
         "Midnight Rain",
         "Question...?",
@@ -244,16 +243,48 @@
         "Would've, Could've, Should've",
         "Dear Reader",
         "Hits Different",
-        "Snow On The Beach (feat. More Lana Del Rey)",
-        "Karma (feat. Ice Spice)",
+        "Karma",
         "You're Losing Me",
+      ]);
+      
+      _Albums.set("The Tortured Poets Department", [
+        "Fortnight",
+        "The Tortured Poets Department",
+        "My Boy Only Breaks His Favorite Toys",
+        "Down Bad",
+        "So Long, London",
+        "But Daddy I Love Him",
+        "Fresh Out the Slammer",
+        "Florida!!!",
+        "Guilty as Sin?",
+        "Who's Afraid of Little Old Me?",
+        "I Can Fix Him (No Really I Can)",
+        "Loml",
+        "I Can Do It with a Broken Heart",
+        "The Smallest Man Who Ever Lived",
+        "The Alchemy",
+        "Clara Bow",
+      ]);
+      
+      _Albums.set("The Life of a Showgirl", [
+        "The Fate of Ophelia",
+        "Elizabeth Taylor",
+        "Opalite",
+        "Father Figure",
+        "Eldest Daughter",
+        "Ruin the Friendship",
+        "Actually Romantic",
+        "Wish List",
+        "Wood",
+        "Cancelled!",
+        "Honey",
+        "The Life of a Showgirl",
       ]);
     </script>
     <script type="text/javascript">
       var songs = [];
       var Ranker, choices = 0, question;
 
-      // Song Ranking Logic
       class PreferenceMachine {
         constructor(n) {
           this.size = n;
@@ -299,7 +330,6 @@
         }
       }
 
-      // User Ranking Function
       function SongBattle(answer) {
         if (answer != null) {
           console.log([songs[question.a], "no preference", songs[question.b]][answer + 1]);
@@ -371,7 +401,6 @@
         $("#status-bar").append(content);
       }
 
-      // Progress Estimation
       function Progress() {
         var count = 0;
         for (var dict of Object.values(Ranker.items)) {
@@ -386,7 +415,6 @@
     </script>
   </head>
   <body>
-    <!-- Navigation Panel -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="index.html">Taylor's Version</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -449,14 +477,11 @@
         <hr><p class="text-center">&copy; Joshua Robison</p>
       </div>
     </footer>
-    <!-- JavaScript Library Dependencies -->
     <script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
     <script type="text/javascript" src="js/popper.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-select.min.js"></script>
-    <!-- Custom JavaScript Functions -->
     <script type="text/javascript">
-      // Load Album Contents
       $(document).ready(function() {
         for (const [album, tracklist] of _Albums) {
           var select = album.replace(/[\(\)']+/g,"").replace(/\s/g,"-") + "-Dropdown";
@@ -487,7 +512,6 @@
         }
       });
 
-      // Begin Song Ranking Battle
       $("#start-button").click(function() {
         songs = [];
         choices = 0, question = null;
@@ -504,7 +528,6 @@
         SongBattle(null);
       });
 
-      // Toggle ON All Songs
       $("#select-all-button").click(function() {
         for (const [album, tracklist] of _Albums) {
           var dropdown = "#" + album.replace(/[\(\)']+/g,"").replace(/\s/g,"-") + "-Dropdown";
@@ -512,7 +535,6 @@
         }
       });
 
-      // Toggle OFF All Songs
       $("#deselect-all-button").click(function() {
         for (const [album, tracklist] of _Albums) {
           var dropdown = "#" + album.replace(/[\(\)']+/g,"").replace(/\s/g,"-") + "-Dropdown";
@@ -520,7 +542,6 @@
         }
       });
 
-      // Display HTML Div Block
       const show = (section) => {
         $(".toggable").each(function(i, obj) {
           $(this).css("display", "none");
